@@ -8,15 +8,16 @@ object dmRavin: TdmRavin
       'Database=ravin'
       'User_Name=root'
       'Server=localhost'
-      'Password=132600'
+      'Password=root'
       'DriverID=MySQL')
     UpdateOptions.AssignedValues = [uvUpdateMode]
-    Connected = True
     Left = 40
     Top = 24
   end
   object drvBancoDeDados: TFDPhysMySQLDriverLink
-    VendorLib = 'C:\projects\ravin\bibliotecas\libmysql.dll'
+    VendorLib = 
+      'C:\Users\nagoncalves\Documents\Delphi2Blu2022\Delphi Banco de Da' +
+      'dos\Sistema de Pedido de Compras\libmysql.dll'
     Left = 40
     Top = 80
   end
