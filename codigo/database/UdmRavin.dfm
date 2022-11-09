@@ -16,8 +16,8 @@ object dmRavin: TdmRavin
   end
   object drvBancoDeDados: TFDPhysMySQLDriverLink
     VendorLib = 
-      'C:\Users\nagoncalves\Documents\Delphi2Blu2022\Delphi Banco de Da' +
-      'dos\Sistema de Pedido de Compras\libmysql.dll'
+      'C:\Users\nagoncalves\Documents\Marcio\ravin\bibliotecas\libmysql' +
+      '.dll'
     Left = 40
     Top = 80
   end
