@@ -30,6 +30,8 @@ var
 
 implementation
 
+uses UresourceUtils;
+
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
@@ -68,17 +70,13 @@ begin
 end;
 
 procedure TdmRavin.CriarTabelas; //2.1-procedure para puxar o SCRIPT de CREAT
-var
-  LSqlArquivoScripts: TStringList;
-  LCaminhoArquivo: String;
 begin
-  LSqlArquivoScripts := TStringList.Create();
-
-  LCaminhoArquivo := 'C:\Users\nagoncalves\Documents\Marcio\ravin\database\createTable.sql';
-  LSqlArquivoScripts.LoadFromFile(LCaminhoArquivo);
-  cnxBancoDeDados.ExecSQL(LSqlArquivoScripts.Text);
-
-  FreeAndNil(LSqlArquivoScripts);
+  try
+    cnxBancoDeDados.ExecSQL(TResourceUtils.carregarArquivoResource('createTable.sql', 'ravin'));
+  Except
+    on E: Exception do
+      ShowMessage(E.message);
+  end;
 end;
 
 procedure TdmRavin.DataModuleCreate(Sender: TObject);
@@ -87,29 +85,18 @@ begin
     cnxBancoDeDados.Connected := true;
 end;
 
-procedure TdmRavin.InserirDados; //2.2-procedure
-var
-  LSqlArquivoScripts: TStringList;
-  LCaminhoArquivo: String;
+procedure TdmRavin.InserirDados; //2.2-procedure para puxar os inserts
 begin
-  LSqlArquivoScripts := TStringList.Create();
-
-  LCaminhoArquivo := 'C:\Users\nagoncalves\Documents\Marcio\ravin\database\inserts.sql';
-  LSqlArquivoScripts.LoadFromFile(LCaminhoArquivo);
-
   try
     cnxBancoDeDados.StartTransaction();
-    cnxBancoDeDados.ExecSQL(LSqlArquivoScripts.Text);
-    cnxBancoDeDados.Commit();
-    except
-     on E: Exception do  begin
+    cnxBancoDeDados.ExecSQL(TResourceUtils.carregarArquivoResource('inserts.sql','ravin'));
+  except 
+    on E: Exception do
+    begin
       cnxBancoDeDados.Rollback();
       ShowMessage(E.Message);
-    end;
-  
+    end;          
   end;
-
-  FreeAndNil(LSqlArquivoScripts);
 end;
 
 end.
