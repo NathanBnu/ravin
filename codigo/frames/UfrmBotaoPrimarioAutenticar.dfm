@@ -1,0 +1,39 @@
+object frmBotaoPrimarioAutenticar: TfrmBotaoPrimarioAutenticar
+  Left = 0
+  Top = 0
+  Width = 164
+  Height = 56
+  Color = 7969620
+  ParentBackground = False
+  ParentColor = False
+  TabOrder = 0
+  object pnlFundo: TPanel
+    Left = 0
+    Top = 0
+    Width = 164
+    Height = 56
+    Align = alClient
+    Color = 7969620
+    ParentBackground = False
+    TabOrder = 0
+    object spdBotaoPrimario: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 162
+      Height = 54
+      Align = alClient
+      Caption = 'Autenticar'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clHighlightText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 164
+      ExplicitHeight = 56
+    end
+  end
+end
