@@ -7,6 +7,7 @@ uses
   Winapi.Messages,
   System.SysUtils,
   System.Variants,
+  FireDac.Phys.MySQLWrapper,
   System.Classes,
   Vcl.Graphics,
   Vcl.Controls,
@@ -47,7 +48,7 @@ var
 implementation
 
 uses
-  UusuarioDao, UfrmLogin, Uusuario, UvalidadorUsuario; //eu exclui o Uusuario
+  UusuarioDao, UfrmLogin, Uusuario, UvalidadorUsuario;
 
 {$R *.dfm}
 
@@ -67,15 +68,22 @@ begin //registrar, ler os valores dos campos, criar o objeto de usuario, setar o
     LUsuario.alteradoEm := now();
     LUsuario.alteradoPor := 'admin';
 
+    TValidadorUsuario.Validar(LUsuario, edtConfirmarSenha.Text);
+
     LDao := TUsuarioDAO.Create();
     LDao.InserirUsuario(LUsuario);
-    
-  except on E: Exception do
-    showmessage('Não foi possivel cadastrar o usuário, verifique os valores informados!');
+
+    FreeAndnil(LDAO);
+  except
+    on E: EMySQLNativeException do begin
+      ShowMessage('Erro ao insesrir o usuário no banco');
+    end;
+    on E: Exception do
+      showmessage(E.Message);
   end;
   
   FreeAndNil(LUsuario);
-  FreeAndnil(LDAO);
+
 end;
 
 procedure TfrmRegistrar.lblSubTituloAutenticarClick(Sender: TObject);
