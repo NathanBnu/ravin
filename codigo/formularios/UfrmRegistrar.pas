@@ -52,43 +52,50 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmRegistrar.frmBotaoPrimarioRegistrarspbBotaoPrimarioClick(
-  Sender: TObject);
+procedure TfrmRegistrar.frmBotaoPrimarioRegistrarspbBotaoPrimarioClick
+  (Sender: TObject);
 var
-LUsuario: TUsuario;
-LDao: TUsuarioDao;
-begin //registrar, ler os valores dos campos, criar o objeto de usuario, setar os valores, criar um DAO, chamar o metodo para salvar o usuario
+  LUsuario: TUsuario;
+  LDao: TUsuarioDao;
+begin // registrar, ler os valores dos campos, criar o objeto de usuario, setar os valores, criar um DAO, chamar o metodo para salvar o usuario
   try
-    LUsuario := TUsuario.create();
-    LUsuario.Login := edtLogin.Text;
-    LUsuario.senha := edtSenha.text;
-    LUsuario.PessoaId := 1;
-    LUsuario.CriadoEm := now();
-    LUsuario.criadopor := 'admin';
-    LUsuario.alteradoEm := now();
-    LUsuario.alteradoPor := 'admin';
+    try
+      LUsuario := TUsuario.create();
+      LUsuario.Login := edtLogin.Text;
+      LUsuario.senha := edtSenha.Text;
+      LUsuario.PessoaId := 1;
+      LUsuario.CriadoEm := now();
+      LUsuario.criadopor := 'admin';
+      LUsuario.alteradoEm := now();
+      LUsuario.alteradoPor := 'admin';
 
-    TValidadorUsuario.Validar(LUsuario, edtConfirmarSenha.Text);
+      TValidadorUsuario.Validar(LUsuario, edtConfirmarSenha.Text);
 
-    LDao := TUsuarioDAO.Create();
-    LDao.InserirUsuario(LUsuario);
+      LDao := TUsuarioDao.create();
+      LDao.InserirUsuario(LUsuario);
 
-    FreeAndnil(LDAO);
-  except
-    on E: EMySQLNativeException do begin
-      ShowMessage('Erro ao insesrir o usuário no banco');
+    except
+      on E: EMySQLNativeException do
+      begin
+        ShowMessage('Erro ao insesrir o usuário no banco');
+      end;
+      on E: Exception do
+        ShowMessage(E.Message);
     end;
-    on E: Exception do
-      showmessage(E.Message);
+
+  finally
+    if assigned(LDao) then
+      BEGIN
+        FreeAndnil(LDao);
+      END;
+    FreeAndnil(LUsuario);
   end;
-  
-  FreeAndNil(LUsuario);
 
 end;
 
 procedure TfrmRegistrar.lblSubTituloAutenticarClick(Sender: TObject);
 begin
-  if not Assigned(frmLogin) then
+  if not assigned(frmLogin) then
   begin
     Application.CreateForm(TfrmLogin, frmLogin);
   end;

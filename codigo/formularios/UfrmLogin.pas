@@ -34,7 +34,7 @@ implementation
 
 {$R *.dfm}
 
-uses UfrmPainelGestao, UusuarioDao, Uusuario, UfrmRegistrar;
+uses UfrmPainelGestao, UusuarioDao, Uusuario, UfrmRegistrar, UiniUtils;
 
 procedure TfrmLogin.frmBotaoPrimarioAutenticar1spdBotaoPrimarioClick(
   Sender: TObject);
@@ -54,6 +54,9 @@ begin
 
   if Assigned(LUsuario) then
   begin
+    //Conseguiu logar
+    TIniUtils.gravarPropriedade(TSECAO.INFORMACOES_GERAIS, TPROPRIEDADE.LOGADO, TIniUtils.VALOR_VERDADEIRO);
+
     if not Assigned(frmPainelGestao) then
       begin
         Application.CreateForm(TfrmPainelGestao, frmPainelGestao)
