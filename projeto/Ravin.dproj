@@ -170,6 +170,10 @@
         </DCCReference>
         <DCCReference Include="..\codigo\validadores\UvalidadorUsuario.pas"/>
         <DCCReference Include="..\codigo\util\UiniUtils.pas"/>
+        <DCCReference Include="..\codigo\formularios\UfrmListarUsuarios.pas">
+            <Form>frmListarUsuarios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

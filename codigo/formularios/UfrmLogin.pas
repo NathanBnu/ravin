@@ -34,7 +34,8 @@ implementation
 
 {$R *.dfm}
 
-uses UfrmPainelGestao, UusuarioDao, Uusuario, UfrmRegistrar, UiniUtils;
+uses UfrmPainelGestao, UusuarioDao, Uusuario, UfrmRegistrar, UiniUtils,
+  UfrmListarUsuarios;
 
 procedure TfrmLogin.frmBotaoPrimarioAutenticar1spdBotaoPrimarioClick(
   Sender: TObject);

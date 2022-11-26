@@ -1268,6 +1268,26 @@ object frmPainelGestao: TfrmPainelGestao
       ParentBiDiMode = False
       ParentFont = False
     end
+    object lblTitulo: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 169
+      Height = 474
+      Align = alClient
+      AutoSize = False
+      Caption = 'Deslogar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -17
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = frmMenuItemSairlblTituloClick
+      ExplicitLeft = 6
+      ExplicitTop = -2
+      ExplicitHeight = 515
+    end
     inline frmMenuItemMesas: TfrmMenuItem
       Left = 0
       Top = 168
@@ -2340,6 +2360,7 @@ object frmPainelGestao: TfrmPainelGestao
       inherited pnlFundo: TPanel
         inherited lblTitulo: TLabel
           Caption = 'Pessoas'
+          OnClick = frmMenuItemPessoaslblTituloClick
         end
       end
     end
@@ -5718,6 +5739,10 @@ object frmPainelGestao: TfrmPainelGestao
         inherited lblTitulo: TLabel
           Caption = 'Deslogar'
           OnClick = frmMenuItemSairlblTituloClick
+          ExplicitLeft = 42
+          ExplicitTop = 20
+          ExplicitWidth = 129
+          ExplicitHeight = 32
         end
       end
     end

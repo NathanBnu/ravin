@@ -16,8 +16,8 @@ object frmLogin: TfrmLogin
   PixelsPerInch = 96
   TextHeight = 13
   object pnlAutenticacao: TPanel
-    Left = 136
-    Top = 0
+    Left = 128
+    Top = -7
     Width = 377
     Height = 497
     Hint = '50'
@@ -59,8 +59,8 @@ object frmLogin: TfrmLogin
       ParentFont = False
     end
     object lblSubTituloRegistrar: TLabel
-      Left = 0
-      Top = 424
+      Left = 16
+      Top = 426
       Width = 377
       Height = 19
       Alignment = taCenter

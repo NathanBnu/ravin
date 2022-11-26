@@ -2,7 +2,7 @@ unit UusuarioDao;
 
 interface
 uses
-  Uusuario, FireDAC.Comp.Client, System.SysUtils;
+  Uusuario, FireDAC.Comp.Client, System.SysUtils, System.Classes,System.Generics.Collections;
 
 type TUsuarioDAO = class
   private
@@ -10,7 +10,8 @@ type TUsuarioDAO = class
   protected
 
   public
-  //METODO PARA BUSCAR O USUARIO NO BANCO DE DADOS PARA VER SE EXISTE
+  //Metodos
+  function BuscarTodosUsuarios(): TList<TUsuario>;
   function BuscarUsuarioPorLoginSenha(PLogin: String; PSenha: String) : TUsuario;
   procedure InserirUsuario(PUsuario: TUsuario);
 end;
@@ -21,6 +22,44 @@ uses
   UdmRavin;
 
 { TUsuarioDAO }
+
+function TUsuarioDAO.BuscarTodosUsuarios: TList<TUsuario>;
+var
+  LQuery: TFDQuery;
+  LLista: TList<TUsuario>;
+  LUsuario: TUsuario;
+begin
+  LQuery := TFDQuery.Create(nil);
+  LQuery.Connection := dmRavin.cnxBancoDeDados;
+  LQuery.SQL.Text := 'SELECT * FROM usuario';
+  LQuery.Open();
+
+  Llista := TList<TUsuario>.Create();
+
+  LUsuario := nil;
+
+  LQuery.First;
+  //Mapear os dados carregados para o objeto
+  while not LQUERY.Eof do
+  begin
+    LUsuario := TUsuario.Create();
+    LUsuario.id := LQuery.FieldByName('id').AsInteger;
+    LUsuario.login := LQuery.FieldByName('login').AsString;
+    LUsuario.senha := LQuery.FieldByName('senha').AsString;
+    LUsuario.pessoaId := LQuery.FieldByName('pessoaId').AsInteger;
+    LUsuario.criadoEm := LQuery.FieldByName('criadoEm').asDateTime;
+    LUsuario.criadoPor := LQuery.FieldbyName('criadoPor').AsString;
+    LUsuario.alteradoEm := LQuery.Fieldbyname('alteradoEm').asDateTime;
+    LUsuario.alteradoPor := LQuery.FieldByName('AlteradoPor').asString;
+
+    Llista.add(LUsuario);
+    LQuery.Next;
+  end;
+
+
+  FreeAndNil(LQuery);
+  Result := LLista;
+end;
 
 function TUsuarioDAO.BuscarUsuarioPorLoginSenha(PLogin,
   PSenha: String): TUsuario;
@@ -76,6 +115,8 @@ begin
 
   FreeAndNil(LQuery);
 end;
+
+
 
 
 end.

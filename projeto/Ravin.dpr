@@ -20,7 +20,8 @@ uses
   UfrmBotaoPrimario in '..\codigo\frames\UfrmBotaoPrimario.pas' {frmBotaoPrimario: TFrame},
   UfrmRegistrar in '..\codigo\formularios\UfrmRegistrar.pas' {frmRegistrar},
   UvalidadorUsuario in '..\codigo\validadores\UvalidadorUsuario.pas',
-  UiniUtils in '..\codigo\util\UiniUtils.pas';
+  UiniUtils in '..\codigo\util\UiniUtils.pas',
+  UfrmListarUsuarios in '..\codigo\formularios\UfrmListarUsuarios.pas' {frmListarUsuarios};
 
 {$R *.res}
 
@@ -31,5 +32,6 @@ begin
   Application.CreateForm(TdmRavin, dmRavin);
   Application.CreateForm(TfrmSplash, frmSplash);
   Application.CreateForm(TfrmRegistrar, frmRegistrar);
+  Application.CreateForm(TfrmListarUsuarios, frmListarUsuarios);
   Application.Run;
 end.
