@@ -70,6 +70,7 @@ begin // registrar, ler os valores dos campos, criar o objeto de usuario, setar 
       LUsuario.alteradoPor := 'admin';
 
       TValidadorUsuario.Validar(LUsuario, edtConfirmarSenha.Text);
+      TValidadorUsuario.isCPF(edtCpf.text); //VALIDAR CPF
 
       LDao := TUsuarioDao.create();
       LDao.InserirUsuario(LUsuario);

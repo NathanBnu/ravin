@@ -1,26 +1,13 @@
-unit UvalidadorUsuario;
+unit ValidaCPF;
 
 interface
+function isCPF(CPF: string): boolean;
+function imprimeCPF(CPF: string): string;
 
-uses Uusuario, system.sysutils;
-
-type TValidadorUsuario = class
-  private
-
-  protected
-
-  public
-  class procedure Validar(PUsuario: TUsuario; PSenhaConfirmação:String);
-  class function isCPF(CPF: string): boolean;
-end;
 implementation
+uses SysUtils; // necessário para utilizar a função "StrToInt"
 
-{ TValidadorUsuario }
-
-uses UfrmRegistrar;
-
-//validarCPF
-class function TValidadorUsuario.isCPF(CPF: string): boolean;
+function isCPF(CPF: string): boolean;
 var  dig10, dig11: string;
     s, i, r, peso: integer;
 begin
@@ -72,37 +59,12 @@ begin
   except
     isCPF := false
   end;
-
-  if IsCpf(cpf) then begin
-    raise Exception.Create('cpf invalido');
-  end;
 end;
 
-class procedure TValidadorUsuario.Validar(PUsuario: TUsuario; PSenhaConfirmação:String);
+function imprimeCPF(CPF: string): string;
 begin
-//cpf) não pode ser vazio
-//quantidade de caractere do login
-//so numero no cpf
-//nome n pode ser numero
-//validar carcteres especiais nos campos
-//senha = confirmação de senha
-//cpf é valido
-
-  if PUsuario.login.IsEmpty then begin
-    raise Exception.Create('O Campo login não pode ser vazio');
-  end;
-
-  if PUsuario.senha.IsEmpty then begin
-    raise Exception.Create('O Campo senha não pode ser vazio');
-  end;
-
-  if PUsuario.senha <> PSenhaConfirmação then begin
-    raise Exception.Create('As senha não conferem');
-  end;
-
-  if length(Pusuario.login) > 9 then begin
-    raise exception.Create('Login não pode passar de 9 caracteres');
-  end;
+  imprimeCPF := copy(CPF, 1, 3) + '.' + copy(CPF, 4, 3) + '.' +
+    copy(CPF, 7, 3) + '-' + copy(CPF, 10, 2);
 end;
 
 end.
