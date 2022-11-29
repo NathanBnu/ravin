@@ -61,7 +61,8 @@ implementation
 uses
   UfrmSobre,
   UfrmProdutos,
-  UfrmMesas, UfrmComandas, UiniUtils, UfrmListarUsuarios;
+  UfrmMesas, UfrmComandas, UiniUtils, UfrmListarUsuarios,
+  USetarFormularioPrincipal, UfrmLogin;
 
 procedure TfrmPainelGestao.FrameMenuItemMesasLabelTitleClick(Sender: TObject);
 begin
@@ -107,7 +108,12 @@ end;
 procedure TfrmPainelGestao.frmMenuItemSairlblTituloClick(Sender: TObject);
 begin
   TIniUtils.gravarPropriedade(TSECAO.INFORMACOES_GERAIS, TPROPRIEDADE.LOGADO, TIniUtils.VALOR_FALSO);
-  Application.Terminate();
+
+
+  TSetarFormularioPrincipal.SetarFormularioPrincipal(frmlogin);
+  frmlogin.Show();
+
+  Close;
 end;
 
 procedure TfrmPainelGestao.frmMenuItemSobrelblTituloClick(Sender: TObject);

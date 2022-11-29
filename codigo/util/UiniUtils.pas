@@ -6,10 +6,12 @@ uses
   Vcl.Forms,
   TypInfo,
   IniFiles;
+
 type
-  TSECAO = (CONFIGURACOES, INFORMACOES_GERAIS);
+  TSECAO = (CONFIGURACOES, INFORMACOES_GERAIS, BANCO);
 type
-  TPROPRIEDADE = (NOME_DATABASE, LOGADO);
+  TPROPRIEDADE = (LOGADO, SERVIDOR, PORTA, USUARIO, SENHA, NOME_BASE, CAMINHO_BANCO, DRIVER_ID);
+
 type
   TIniUtils = class
   private
@@ -27,6 +29,7 @@ type
   end;
 implementation
 { TIniUltis }
+
 constructor TIniUtils.Create;
 begin
   inherited;
@@ -35,6 +38,7 @@ destructor TIniUtils.Destroy;
 begin
   inherited;
 end;
+
 class procedure TIniUtils.gravarPropriedade(PSecao: TSECAO;
   PPropriedade: TPROPRIEDADE; PValor: String);
 var
@@ -55,6 +59,7 @@ begin
 
   LarquivoINI.Free;
 end;
+
 class function TIniUtils.lerPropriedade(PSecao: TSECAO;
   PPropriedade: TPROPRIEDADE): String;
 var
@@ -69,7 +74,9 @@ begin
   LNomeSecao := GetEnumName(TypeInfo(TSECAO), Integer(PSECAO));
   LNomePropriedade := GetEnumName(TypeInfo(TPROPRIEDADE), Integer(PPropriedade));
   Result := LarquivoINI.ReadString(LNomeSecao, LNomePropriedade, '');
+
   LarquivoINI.Free;
 end;
+
 end.
 

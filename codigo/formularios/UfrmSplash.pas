@@ -32,7 +32,6 @@ type
     { Private declarations }
     Inicialized: Boolean;
     procedure InicializarAplicacao();
-    procedure SetarFormPrincipal(NewMainForm: TForm);
     procedure ShowPainelGestao();
     procedure ShowLogin();
   public
@@ -46,7 +45,7 @@ implementation
 
 {$R *.dfm}
 
-uses UfrmPainelGestao, UfrmLogin, UiniUtils;
+uses UfrmPainelGestao, UfrmLogin, UiniUtils, USetarFormularioPrincipal;
 
 procedure TfrmSplash.FormCreate(Sender: TObject);
 begin
@@ -86,14 +85,6 @@ begin
   end;
 end;
 
-procedure TfrmSplash.SetarFormPrincipal(NewMainForm: TForm);
-var
-  tmpMain: ^TCustomForm;
-begin
-  tmpMain := @Application.Mainform;
-  tmpMain^ := NewMainForm;
-end;
-
 procedure TfrmSplash.ShowLogin;
 begin
   if not Assigned(frmLogin) then
@@ -101,7 +92,7 @@ begin
     Application.CreateForm(TfrmLogin, frmLogin);
   end;
 
-  SetarFormPrincipal(frmLogin);
+  TSetarFormularioPrincipal.SetarFormularioPrincipal(frmLogin);
   frmLogin.Show();
 
   Close;
@@ -114,7 +105,7 @@ begin
     Application.CreateForm(TfrmPainelGestao, frmPainelGestao);
   end;
 
-  SetarFormPrincipal(frmPainelGestao);
+  TSetarFormularioPrincipal.SetarFormularioPrincipal(frmPainelGestao);
   frmPainelGestao.Show();
 
   Close;

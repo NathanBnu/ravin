@@ -30,7 +30,7 @@ var
 
 implementation
 
-uses UresourceUtils;
+uses UresourceUtils, UiniUtils;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -39,8 +39,9 @@ uses UresourceUtils;
 procedure TdmRavin.cnxBancoDeDadosAfterConnect(Sender: TObject); //3-Depois de Conectar, vamos chamar as procedures.
 var
   LCriarBaseDados: Boolean;
+  lcaminhoBaseDados: string;
 begin
-  LCriarBaseDados := not FileExists('C:\ProgramData\MySQL\MySQL Server 8.0\Data\ravin\statusmesa.ibd');
+  lcaminhoBaseDados := TiniUtils.lerpropriedade(TSECAO.BANCO, TPROPRIEDADE.CAMINHO_BANCO);
 
   if LCriarBaseDados then
   begin
@@ -51,20 +52,22 @@ end;
 
 procedure TdmRavin.cnxBancoDeDadosBeforeConnect(Sender: TObject);  //1-CONFIGURANDO BANCO VIA CODIGO
 var
+  lcaminhoBaseDados: string;
   LCriarBaseDados: Boolean;
 begin
-  LCriarBaseDados := not FileExists('C:\ProgramData\MySQL\MySQL Server 8.0\Data\ravin\statusmesa.ibd');
+  lcaminhoBaseDados := TiniUtils.lerpropriedade(TSECAO.BANCO, TPROPRIEDADE.CAMINHO_BANCO);
+
   with cnxBancoDeDados do
   begin
-    Params.Values['Server'] := 'localhost';
-    Params.Values['User_Name'] := 'root';
-    Params.Values['Password'] := 'root';
-    Params.Values['DriverId'] := 'MySQL';
-    Params.Values['Port'] := '3306';
+    Params.Values['Server'] := TiniUtils.lerpropriedade(TSECAO.BANCO, TPROPRIEDADE.SERVIDOR);
+    Params.Values['User_Name'] := TiniUtils.lerpropriedade(TSECAO.BANCO, TPROPRIEDADE.USUARIO);
+    Params.Values['Password'] := TiniUtils.lerpropriedade(TSECAO.BANCO, TPROPRIEDADE.SENHA);
+    Params.Values['DriverId'] := TiniUtils.lerpropriedade(TSECAO.BANCO, TPROPRIEDADE.DRIVER_ID);
+    Params.Values['Port'] := TiniUtils.lerpropriedade(TSECAO.BANCO, TPROPRIEDADE.PORTA);
 
     if not LCriarBaseDados then
     begin
-        Params.Values['Database'] := 'ravin';
+        Params.Values['Database'] := TiniUtils.lerpropriedade(TSECAO.BANCO, TPROPRIEDADE.NOME_BASE);
     end;
   end;
 end;

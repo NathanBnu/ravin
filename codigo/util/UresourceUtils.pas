@@ -41,4 +41,5 @@ begin
 
   Result := LConteudoTexto;
 end;
+
 end.

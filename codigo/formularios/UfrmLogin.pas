@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.StdCtrls, UfrmBotaoPrimarioAutenticar;
+  Vcl.StdCtrls, UfrmBotaoPrimarioAutenticar, USetarFormularioPrincipal;
 
 type
   TfrmLogin = class(TForm)
@@ -24,7 +24,6 @@ type
   private
     { Private declarations }
   public
-    procedure SetarFormPrincipal(PNovoFormulario: TForm);
   end;
 
 var
@@ -63,10 +62,11 @@ begin
         Application.CreateForm(TfrmPainelGestao, frmPainelGestao)
     end;
 
-    SetarFormPrincipal(frmPainelGestao);
+    TSetarFormularioPrincipal.SetarFormularioPrincipal(frmPainelGestao);
     frmPainelGestao.Show();
 
     Close();
+
   end else
     showmessage('Login e/ou senha inválidos');
 
@@ -82,19 +82,9 @@ begin
     Application.CreateForm(TfrmRegistrar, frmRegistrar);
   end;
 
-  SetarFormPrincipal(frmRegistrar);
+  TSetarFormularioPrincipal.SetarFormularioPrincipal(frmRegistrar);
   frmRegistrar.Show();
-
   Close();
-end;
-
-
-procedure TfrmLogin.SetarFormPrincipal(PNovoFormulario: TForm);
-var
-  tmpMain: ^TCustomForm;
-begin
-  tmpMain := @Application.Mainform;
-  tmpMain^ := PNovoFormulario;
 end;
 
 end.
