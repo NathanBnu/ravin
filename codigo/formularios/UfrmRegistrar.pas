@@ -64,13 +64,13 @@ begin // registrar, ler os valores dos campos, criar o objeto de usuario, setar 
       LUsuario.Login := edtLogin.Text;
       LUsuario.senha := edtSenha.Text;
       LUsuario.PessoaId := 1;
+      LUsuario.CPF := edtCpf.Text;
       LUsuario.CriadoEm := now();
       LUsuario.criadopor := 'admin';
       LUsuario.alteradoEm := now();
       LUsuario.alteradoPor := 'admin';
 
       TValidadorUsuario.Validar(LUsuario, edtConfirmarSenha.Text);
-      TValidadorUsuario.isCPF(edtCpf.text); //VALIDAR CPF
 
       LDao := TUsuarioDao.create();
       LDao.InserirUsuario(LUsuario);
@@ -85,7 +85,7 @@ begin // registrar, ler os valores dos campos, criar o objeto de usuario, setar 
     end;
 
   finally
-    if assigned(LDao) then
+    if LDao = nil then
       BEGIN
         FreeAndnil(LDao);
       END;

@@ -54,7 +54,7 @@ begin
 
   if Assigned(LUsuario) then
   begin
-    //Conseguiu logar
+    //Conseguiu logar   REGISTRAR HORARIO
     TIniUtils.gravarPropriedade(TSECAO.INFORMACOES_GERAIS, TPROPRIEDADE.LOGADO, TIniUtils.VALOR_VERDADEIRO);
 
     if not Assigned(frmPainelGestao) then

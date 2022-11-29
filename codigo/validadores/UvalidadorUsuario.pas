@@ -72,10 +72,6 @@ begin
   except
     isCPF := false
   end;
-
-  if IsCpf(cpf) then begin
-    raise Exception.Create('cpf invalido');
-  end;
 end;
 
 class procedure TValidadorUsuario.Validar(PUsuario: TUsuario; PSenhaConfirmação:String);
@@ -102,6 +98,10 @@ begin
 
   if length(Pusuario.login) > 9 then begin
     raise exception.Create('Login não pode passar de 9 caracteres');
+  end;
+
+  if not TValidadorUsuario.isCPF(PUsuario.CPF) then begin
+    raise Exception.Create('CPF inválido');
   end;
 end;
 

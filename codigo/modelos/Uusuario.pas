@@ -10,6 +10,7 @@ type
     Flogin: String;
     Fsenha: String;
     FpessoaId: Integer;
+    FCPF: String;
     FcriadoEm: TDateTime;
     FCriadoPor: string;
     FalteradoEm: TDateTime;
@@ -22,6 +23,7 @@ type
     property login: String read Flogin write Flogin;
     property senha: String read Fsenha write Fsenha;
     property pessoaId: Integer read FpessoaId write FpessoaId;
+    property CPF: String read FCPF write FCPF;
     property criadoEm: TDateTime read FcriadoEm write FcriadoEm;
     property criadoPor: String read FCriadoPor write FCriadoPor;
     property alteradoEm: TDateTime read FalteradoEm write FalteradoEm;
