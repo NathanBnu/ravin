@@ -9,7 +9,7 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
-
+  system.DateUtils,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
@@ -34,8 +34,10 @@ type
     procedure InicializarAplicacao();
     procedure ShowPainelGestao();
     procedure ShowLogin();
+
   public
-    { Public declarations }
+    function verificarDeveLogar(): Boolean;
+    const MAX_DIAS_LOGIN: Integer = 5; //numero maximo de dias sem logar
   end;
 
 var
@@ -62,10 +64,14 @@ end;
 procedure TfrmSplash.InicializarAplicacao;
 var
   LLogado: string;
+  LDeveLogar: boolean;
 begin
+  //carregando se o usuario esta logado
   LLogado := TIniUtils.lerPropriedade(TSECAO.INFORMACOES_GERAIS, TPROPRIEDADE.LOGADO);
 
-  if LLogado = TiniUTILS.VALOR_VERDADEIRO then
+  LDeveLogar := verificarDeveLogar();
+
+  if (LLogado = TiniUTILS.VALOR_VERDADEIRO) and (not LDeveLogar)then
   begin
     ShowPainelgestao();
   end
@@ -83,6 +89,29 @@ begin
     Inicialized := true;
     InicializarAplicacao();
   end;
+end;
+
+function TfrmSplash.verificarDeveLogar: Boolean;
+var
+  LDataString: String;
+  LDataTimeUltimoLogin: TDateTime;
+  LDataExpiracaoLogin: TDateTime;
+  LExisteDataUltimoLogin: boolean;
+begin
+  //carregando a data e hora do ultimo login do usuario
+  LDataString := TIniUtils.lerPropriedade(TSECAO.INFORMACOES_GERAIS, TPROPRIEDADE.DATAHORA_ULTIMO_LOGIN);
+
+  try
+    LDataTimeUltimoLogin := StrToDateTime(LDataString);
+
+    LDataExpiracaoLogin := IncDay(LDataTimeUltimoLogin, MAX_DIAS_LOGIN);
+
+    Result := LDataExpiracaoLogin < now();
+  except
+    on E: Exception do
+      Result := true;
+  end;
+
 end;
 
 procedure TfrmSplash.ShowLogin;

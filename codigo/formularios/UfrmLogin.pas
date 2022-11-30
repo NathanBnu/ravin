@@ -45,6 +45,9 @@ var
   LLogin: String;
   LSenha: String;
 begin
+  LUsuario := nil;
+  LDao := nil;
+
   Ldao := TUsuarioDao.Create;
 
   LLogin := edtLogin.Text;
@@ -54,7 +57,10 @@ begin
 
   if Assigned(LUsuario) then
   begin
-    //Conseguiu logar   REGISTRAR HORARIO
+    //REGISTRANDO HORARIO DO LOGIN!
+    TIniutils.gravarPropriedade(TSECAO.INFORMACOES_GERAIS, TPROPRIEDADE.DATAHORA_ULTIMO_LOGIN, DateTimeToStr(Now()));
+
+    //REGISTRANDO QUE O USUARIO LOGOU COM SUCESSO!
     TIniUtils.gravarPropriedade(TSECAO.INFORMACOES_GERAIS, TPROPRIEDADE.LOGADO, TIniUtils.VALOR_VERDADEIRO);
 
     if not Assigned(frmPainelGestao) then

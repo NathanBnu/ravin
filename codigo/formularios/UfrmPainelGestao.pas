@@ -109,6 +109,10 @@ procedure TfrmPainelGestao.frmMenuItemSairlblTituloClick(Sender: TObject);
 begin
   TIniUtils.gravarPropriedade(TSECAO.INFORMACOES_GERAIS, TPROPRIEDADE.LOGADO, TIniUtils.VALOR_FALSO);
 
+  if not assigned(frmLogin) then
+  begin
+    Application.CreateForm(TfrmLogin, frmLogin);
+  end;
 
   TSetarFormularioPrincipal.SetarFormularioPrincipal(frmlogin);
   frmlogin.Show();

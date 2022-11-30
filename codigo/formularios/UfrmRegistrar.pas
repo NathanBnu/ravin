@@ -70,9 +70,10 @@ begin // registrar, ler os valores dos campos, criar o objeto de usuario, setar 
       LUsuario.alteradoEm := now();
       LUsuario.alteradoPor := 'admin';
 
+      LDao := TUsuarioDao.create();
+
       TValidadorUsuario.Validar(LUsuario, edtConfirmarSenha.Text);
 
-      LDao := TUsuarioDao.create();
       LDao.InserirUsuario(LUsuario);
 
     except

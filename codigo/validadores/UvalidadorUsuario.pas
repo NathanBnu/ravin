@@ -12,6 +12,8 @@ type TValidadorUsuario = class
   public
   class procedure Validar(PUsuario: TUsuario; PSenhaConfirmação:String);
   class function isCPF(CPF: string): boolean;
+
+  Const MAXIMO_CARACTERES: Integer = 9;  //Valor maximo de caracteres para colocar no campo de registro login
 end;
 implementation
 
@@ -96,7 +98,7 @@ begin
     raise Exception.Create('As senha não conferem');
   end;
 
-  if length(Pusuario.login) > 9 then begin
+  if length(Pusuario.login) > MAXIMO_CARACTERES then begin
     raise exception.Create('Login não pode passar de 9 caracteres');
   end;
 
