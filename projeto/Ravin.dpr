@@ -22,7 +22,11 @@ uses
   UvalidadorUsuario in '..\codigo\validadores\UvalidadorUsuario.pas',
   UiniUtils in '..\codigo\util\UiniUtils.pas',
   UfrmListarUsuarios in '..\codigo\formularios\UfrmListarUsuarios.pas' {frmListarUsuarios},
-  USetarFormularioPrincipal in '..\codigo\util\USetarFormularioPrincipal.pas';
+  USetarFormularioPrincipal in '..\codigo\util\USetarFormularioPrincipal.pas',
+  UfrmBotaoCancelar in '..\codigo\frames\UfrmBotaoCancelar.pas' {frmBotaoCancelar: TFrame},
+  UfrmBotaoExcluir in '..\codigo\frames\UfrmBotaoExcluir.pas' {frmBotaoExcluir: TFrame},
+  UfrmCadastroCliente in '..\codigo\formularios\UfrmCadastroCliente.pas' {frmCadastroCliente},
+  UfrmListaClientes in '..\codigo\formularios\UfrmListaClientes.pas' {frmListaClientes};
 
 {$R *.res}
 
@@ -34,5 +38,7 @@ begin
   Application.CreateForm(TfrmSplash, frmSplash);
   Application.CreateForm(TfrmRegistrar, frmRegistrar);
   Application.CreateForm(TfrmListarUsuarios, frmListarUsuarios);
+  Application.CreateForm(TfrmCadastroCliente, frmCadastroCliente);
+  Application.CreateForm(TfrmListaClientes, frmListaClientes);
   Application.Run;
 end.

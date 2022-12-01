@@ -62,7 +62,7 @@ uses
   UfrmSobre,
   UfrmProdutos,
   UfrmMesas, UfrmComandas, UiniUtils, UfrmListarUsuarios,
-  USetarFormularioPrincipal, UfrmLogin;
+  USetarFormularioPrincipal, UfrmLogin, UfrmListaClientes;
 
 procedure TfrmPainelGestao.FrameMenuItemMesasLabelTitleClick(Sender: TObject);
 begin
@@ -93,7 +93,11 @@ end;
 
 procedure TfrmPainelGestao.frmMenuItemPessoaslblTituloClick(Sender: TObject);
 begin
-  frmListarUsuarios.Show();
+  if (not Assigned(frmListaClientes)) then
+  begin
+    Application.CreateForm(TfrmListaClientes, frmListaClientes);
+  end;
+  frmListaClientes.show();
 end;
 
 procedure TfrmPainelGestao.frmMenuItemProdutoslblTituloClick(Sender: TObject);
